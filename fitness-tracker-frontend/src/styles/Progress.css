@@ -1,0 +1,29 @@
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .chart-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 1.2em;
+  }
+  
+  .progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  canvas {
+    max-width: 800px;
+    width: 80%;
+    height: 400px; /* Limit the height */
+    max-height: 400px; /* Ensure the chart height doesn't exceed this */
+  }
+  

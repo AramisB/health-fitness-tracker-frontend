@@ -1,0 +1,58 @@
+header {
+    background-color: #4CAF50; /* Green background */
+    padding: 1rem 2rem; /* Increased padding around the header */
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space between title and nav */
+    align-items: center; /* Center items vertically */
+    color: white; /* Text color */
+}
+
+header h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 1.5rem; /* Header title size */
+}
+
+nav {
+    display: flex; /* Flexbox for navigation items */
+}
+
+nav ul {
+    list-style: none; /* Remove default list styling */
+    display: flex; /* Flexbox for list items */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+nav li {
+    margin-left: 2rem; /* Increased spacing between nav items */
+}
+
+nav a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make links bold */
+}
+
+nav button {
+    background: none; /* Remove button background */
+    border: none; /* Remove button border */
+    color: white; /* Button text color */
+    font-weight: bold; /* Make button text bold */
+    cursor: pointer; /* Pointer cursor for buttons */
+}
+
+nav button:hover,
+nav a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; /* Stack nav items on smaller screens */
+    }
+
+    nav li {
+        margin-left: 0; /* Remove left margin for stacked items */
+        margin-bottom: 0.5rem; /* Add bottom margin for spacing */
+    }
+}

@@ -1,0 +1,74 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Full height */
+}
+
+.gradient-form {
+  background: linear-gradient(to right, #240a55, #3c6c8b); /* Soft blue gradient */
+  color: #333; /* Dark text for contrast */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100%; /* Full height */
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: white; /* White background for the card */
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+h4 {
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #007BFF; /* Primary color for headings */
+}
+
+.form-label {
+  font-weight: 500;
+  color: #555; /* Darker color for labels */
+}
+
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #007BFF; /* Primary color on focus */
+  outline: none;
+}
+
+.btn {
+  background-color: #007BFF; /* Primary button color */
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.text-danger {
+  color: #dc3545; /* Bootstrap danger color */
+}
+
+a {
+  color: #007BFF; /* Link color */
+}
+
+a:hover {
+  color: #0056b3; /* Darker shade on hover */
+}
