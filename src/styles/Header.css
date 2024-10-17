@@ -56,3 +56,16 @@ nav a:hover {
         margin-bottom: 0.5rem; /* Add bottom margin for spacing */
     }
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f8f8;
+  }
+  
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column; /* Stack items vertically on small screens */
+    }
+  }

@@ -72,3 +72,8 @@ a {
 a:hover {
   color: #0056b3; /* Darker shade on hover */
 }
+@media (max-width: 768px) {
+  .login-container {
+    width: 90%; /* Full width on small devices */
+  }
+}

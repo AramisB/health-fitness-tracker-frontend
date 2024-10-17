@@ -26,4 +26,9 @@ h2 {
     height: 400px; /* Limit the height */
     max-height: 400px; /* Ensure the chart height doesn't exceed this */
   }
+  @media (max-width: 768px) {
+    .login-container {
+      width: 90%; /* Full width on small devices */
+    }
+  }
   
