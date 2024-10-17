@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 import fitnessImage from '../images/fitness.png';
+
 function Home() {
   return (
     <div className="home-container">
@@ -11,6 +12,12 @@ function Home() {
         <p>
           Track your health and fitness journey with our easy-to-use application. 
           Log your exercises, set personal goals, and visualize your progress over time!
+        </p>
+        <h3>Why Track Your Fitness?</h3>
+        <p>
+          Keeping track of your fitness journey helps you stay motivated and accountable. 
+          Whether you’re aiming to lose weight, build muscle, or simply maintain a healthy lifestyle, 
+          our app provides you with the tools you need to succeed.
         </p>
         <h3>Features:</h3>
         <ul>
