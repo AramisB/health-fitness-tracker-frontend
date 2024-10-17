@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const response = await fetch('https://health-fitness-tracker-9l7o.vercel.app/api/register', {
+      const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
