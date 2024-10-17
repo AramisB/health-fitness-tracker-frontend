@@ -13,7 +13,7 @@ function Goals() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://health-fitness-tracker-9l7o.vercel.app/api/goals', {
+      const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/goals', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

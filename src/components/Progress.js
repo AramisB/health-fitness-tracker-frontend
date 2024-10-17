@@ -12,7 +12,7 @@ function Progress() {
     const fetchProgress = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('https://health-fitness-tracker-9l7o.vercel.app/api/progress', {
+        const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/progress', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
