@@ -37,6 +37,31 @@
 }
 
 /* Responsive styles */
+@media (min-width: 769px) {
+  .home-container {
+    flex-direction: row; /* Side by side on larger screens */
+    justify-content: space-around; /* Space out items evenly */
+    height: auto; /* Allow the container to resize with content */
+  }
+
+  .home-image {
+    max-width: 300px; /* Adjust image size on larger screens */
+    margin-bottom: 0; /* Remove margin below the image */
+  }
+
+  .home-text {
+    text-align: left; /* Left-align text for better readability */
+  }
+
+  .home-text h2 {
+    font-size: 2.5rem; /* Larger title size for desktop */
+  }
+
+  .home-text h3 {
+    font-size: 1.8rem; /* Larger subheading size for desktop */
+  }
+}
+
 @media (max-width: 768px) {
   .home-text h2 {
     font-size: 1.8rem; /* Reduce size for medium screens */
