@@ -18,7 +18,7 @@ const Dashboard = () => {
               Authorization: `Bearer ${user.token}`,
             },
           });
-          setExercises(response.data.logs); // Assuming logs come from response.data.logs
+          setExercises(response.data.logs);
         } catch (error) {
           console.error('Error fetching exercises:', error);
         }
