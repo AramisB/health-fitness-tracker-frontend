@@ -20,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           {/* Use ProtectedRoute to wrap the protected routes */}
+          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
           <Route path="/log-exercise" element={<ProtectedRoute element={<ExerciseLog />} />} />
           <Route path="/goals" element={<ProtectedRoute element={<Goals />} />} />
           <Route path="/progress" element={<ProtectedRoute element={<Progress />} />} />

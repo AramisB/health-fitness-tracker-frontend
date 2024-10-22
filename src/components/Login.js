@@ -18,7 +18,7 @@ function Login() {
       if (data && data.msg) {
         alert(data.msg); // Ensure data.msg exists before accessing it
       }
-      navigate('/'); // Redirect to home after successful login
+      navigate('/dashboard'); // Redirect to home after successful login
     } catch (error) {
       setError(error.message);
     }
