@@ -9,6 +9,7 @@ import Goals from './components/Goals';
 import Progress from './components/Progress';
 import Home from './components/Home';
 import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (

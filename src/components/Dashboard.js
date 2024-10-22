@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(useAuth);
   const [exercises, setExercises] = useState([]);
   const [goals, setGoals] = useState([]);
   const [progress, setProgress] = useState({});
