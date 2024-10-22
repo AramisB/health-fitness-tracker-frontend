@@ -1,30 +1,41 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
-  const { user } = useContext(useAuth);
+  const { user } = useAuth(); // Correctly use the custom hook to get user
   const [exercises, setExercises] = useState([]);
   const [goals, setGoals] = useState([]);
   const [progress, setProgress] = useState({});
 
   useEffect(() => {
-    // Fetch the user's exercise log
-    axios.get(`/api/exercises/${user.id}`).then(response => {
-      setExercises(response.data);
-    });
-    
-    // Fetch the user's goals
-    axios.get(`/api/goals/${user.id}`).then(response => {
-      setGoals(response.data);
-    });
+    if (user) { // Check if user exists before making API calls
+      const fetchData = async () => {
+        try {
+          // Fetch the user's exercise log
+          const exerciseResponse = await axios.get(`/api/exercises/${user.id}`);
+          setExercises(exerciseResponse.data);
+          
+          // Fetch the user's goals
+          const goalsResponse = await axios.get(`/api/goals/${user.id}`);
+          setGoals(goalsResponse.data);
+          
+          // Fetch the user's progress summary
+          const progressResponse = await axios.get(`/api/progress/${user.id}`);
+          setProgress(progressResponse.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
 
-    // Fetch the user's progress summary
-    axios.get(`/api/progress/${user.id}`).then(response => {
-      setProgress(response.data);
-    });
-  }, [user]);
+      fetchData(); // Call the fetch function
+    }
+  }, [user]); // Dependency on user
+
+  if (!user) {
+    return <p>Loading...</p>; // Handle loading state if user is not yet available
+  }
 
   return (
     <div className="dashboard">
