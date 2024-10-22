@@ -18,7 +18,9 @@ const Dashboard = () => {
               Authorization: `Bearer ${user.token}`,
             },
           });
-          setExercises(response.data.logs);
+          setExercises(response.data,data.exercise);
+          setGoals(response.data.data.goals);
+          setProgress(response.data.data.progress);
         } catch (error) {
           console.error('Error fetching exercises:', error);
         }
@@ -27,46 +29,55 @@ const Dashboard = () => {
     }
   }, [user]);
 
+
   if (!user) {
     return <p>Loading...</p>; 
   }
   return (
     <div className="dashboard">
       <h1>Welcome to Your Dashboard, {user.name}!</h1>
-      
+  
       <section>
         <h2>Your Logged Exercises</h2>
         <div className="card-container">
-          {exercises.map((exercise) => (
-            <div key={exercise.id} className="card">
-              <li>
-                {exercise.type}: {exercise.duration} minutes on {new Date(exercise.date).toLocaleDateString()}
-              </li>
-            </div>
-          ))}
+          {exercises.length === 0 ? (
+            <p>No logged exercises found.</p>
+          ) : (
+            exercises.map((exercise) => (
+              <div key={exercise._id} className="card">
+                <li>
+                  {exercise.type}: {exercise.duration} minutes on {new Date(exercise.date).toLocaleDateString()}
+                </li>
+              </div>
+            ))
+          )}
         </div>
       </section>
   
       <section>
         <h2>Your Fitness Goals</h2>
         <div className="card-container">
-          {goals.map((goal) => (
-            <div key={goal.id} className="card">
-              <li>
-                {goal.description} - Target: {goal.target}
-              </li>
-            </div>
-          ))}
+          {goals.length === 0 ? (
+            <p>No goals set.</p>
+          ) : (
+            goals.map((goal) => (
+              <div key={goal._id} className="card">
+                <li>
+                  {goal.description} - Target: {goal.target}
+                </li>
+              </div>
+            ))
+          )}
         </div>
       </section>
   
       <section>
         <h2>Progress Summary</h2>
         <div className="card card-container">
-          <p>{progress.description}</p>
+          <p>{progress.description || 'No progress summary available.'}</p>
         </div>
       </section>
     </div>
   );
-}
+}  
 export default Dashboard;
