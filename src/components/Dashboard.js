@@ -4,39 +4,32 @@ import axios from 'axios';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
-  const { user } = useAuth(); // Correctly use the custom hook to get user
+  const { user } = useAuth(); 
   const [exercises, setExercises] = useState([]);
   const [goals, setGoals] = useState([]);
   const [progress, setProgress] = useState({});
 
   useEffect(() => {
-    if (user) { // Check if user exists before making API calls
-      const fetchData = async () => {
+    if (user) {
+      const fetchExercises = async () => {
         try {
-          // Fetch the user's exercise log
-          const exerciseResponse = await axios.get(`/api/exercises/${user.id}`);
-          setExercises(exerciseResponse.data);
-          
-          // Fetch the user's goals
-          const goalsResponse = await axios.get(`/api/goals/${user.id}`);
-          setGoals(goalsResponse.data);
-          
-          // Fetch the user's progress summary
-          const progressResponse = await axios.get(`/api/progress/${user.id}`);
-          setProgress(progressResponse.data);
+          const response = await axios.get(`/api/log-exercise`, {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          });
+          setExercises(response.data.logs); // Assuming logs come from response.data.logs
         } catch (error) {
-          console.error('Error fetching data:', error);
+          console.error('Error fetching exercises:', error);
         }
       };
-
-      fetchData(); // Call the fetch function
+      fetchExercises();
     }
-  }, [user]); // Dependency on user
+  }, [user]);
 
   if (!user) {
-    return <p>Loading...</p>; // Handle loading state if user is not yet available
+    return <p>Loading...</p>; 
   }
-
   return (
     <div className="dashboard">
       <h1>Welcome to Your Dashboard, {user.name}!</h1>
