@@ -13,7 +13,7 @@ const Dashboard = () => {
     if (user) {
       const fetchExercises = async () => {
         try {
-          const response = await axios.get(`/api/log-exercise`, {
+          const response = await axios.get(`/api/dashboard`, {
             headers: {
               Authorization: `Bearer ${user.token}`,
             },
