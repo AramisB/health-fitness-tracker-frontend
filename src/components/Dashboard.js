@@ -18,7 +18,7 @@ const Dashboard = () => {
               Authorization: `Bearer ${user.token}`,
             },
           });
-          setExercises(response.data.data.exercise);
+          setExercises(response.data.data.exercises);
           setGoals(response.data.data.goals);
           setProgress(response.data.data.progress);
         } catch (error) {
