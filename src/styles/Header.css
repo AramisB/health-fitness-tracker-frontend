@@ -1,17 +1,24 @@
+/* General header styling */
 header {
     background-color: #4CAF50; /* Green background */
-    padding: 1rem 2rem; /* Increased padding around the header */
+    padding: 1rem 2rem; /* Padding around the header */
     display: flex; /* Flexbox for layout */
     justify-content: space-between; /* Space between title and nav */
     align-items: center; /* Center items vertically */
     color: white; /* Text color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    border-bottom: 2px solid #388E3C; /* Add bottom border */
 }
 
+/* Header title styling */
 header h1 {
     margin: 0; /* Remove default margin */
-    font-size: 1.5rem; /* Header title size */
+    font-size: 1.8rem; /* Header title size */
+    letter-spacing: 1px; /* Add spacing between letters */
+    font-weight: 600; /* Semi-bold for title */
 }
 
+/* Navigation styling */
 nav {
     display: flex; /* Flexbox for navigation items */
 }
@@ -24,48 +31,48 @@ nav ul {
 }
 
 nav li {
-    margin-left: 2rem; /* Increased spacing between nav items */
+    margin-left: 1.5rem; /* Spacing between nav items */
 }
 
 nav a {
     color: white; /* Link color */
     text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Make links bold */
+    font-weight: 500; /* Medium weight for links */
+    font-size: 1rem; /* Increase link size slightly */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
 }
 
+nav a:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #B2DFDB; /* Lighter color on hover */
+    transform: translateY(-2px); /* Slight move up on hover */
+}
+
+/* Logout button styling */
 nav button {
     background: none; /* Remove button background */
     border: none; /* Remove button border */
     color: white; /* Button text color */
-    font-weight: bold; /* Make button text bold */
+    font-weight: 500; /* Medium weight for button */
+    font-size: 1rem; /* Consistent with links */
     cursor: pointer; /* Pointer cursor for buttons */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
 }
 
-nav button:hover,
-nav a:hover {
-    text-decoration: underline; /* Underline links on hover */
+nav button:hover {
+    color: #FFCDD2; /* Light red on hover */
+    transform: translateY(-2px); /* Slight move up on hover */
 }
 
+/* Media query for smaller screens */
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column; /* Stack nav items on smaller screens */
+        align-items: center; /* Center align nav items */
     }
 
     nav li {
         margin-left: 0; /* Remove left margin for stacked items */
-        margin-bottom: 0.5rem; /* Add bottom margin for spacing */
+        margin-bottom: 1rem; /* Add bottom margin for spacing */
     }
 }
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #f8f8f8;
-  }
-  
-  @media (max-width: 768px) {
-    .header {
-      flex-direction: column; /* Stack items vertically on small screens */
-    }
-  }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import '../styles/Header.css'
+import '../styles/Header.css';
 
 const Header = () => {
   const { user, logout } = useAuth(); // Access user and logout function from AuthContext
@@ -27,6 +27,9 @@ const Header = () => {
             // Show these links only when user is logged in
             <>
               <li>
+                <Link to="/dashboard">Dashboard</Link> {/* Add Dashboard link */}
+              </li>
+              <li>
                 <Link to="/log-exercise">Log Exercise</Link>
               </li>
               <li>
@@ -36,7 +39,7 @@ const Header = () => {
                 <Link to="/progress">Progress</Link>
               </li>
               <li>
-                <button onClick={logout}>Logout</button>
+                <button onClick={logout}>Log Out</button>
               </li>
             </>
           )}
