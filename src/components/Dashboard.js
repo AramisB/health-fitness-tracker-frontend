@@ -40,34 +40,40 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <h1>Welcome to Your Dashboard, {user.name}!</h1>
+      
       <section>
         <h2>Your Logged Exercises</h2>
-        <ul>
+        <div className="card-container">
           {exercises.map((exercise) => (
-            <li key={exercise.id}>
-              {exercise.type}: {exercise.duration} minutes on {new Date(exercise.date).toLocaleDateString()}
-            </li>
+            <div key={exercise.id} className="card">
+              <li>
+                {exercise.type}: {exercise.duration} minutes on {new Date(exercise.date).toLocaleDateString()}
+              </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
-
+  
       <section>
         <h2>Your Fitness Goals</h2>
-        <ul>
+        <div className="card-container">
           {goals.map((goal) => (
-            <li key={goal.id}>
-              {goal.description} - Target: {goal.target} 
-            </li>
+            <div key={goal.id} className="card">
+              <li>
+                {goal.description} - Target: {goal.target}
+              </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
-
+  
       <section>
         <h2>Progress Summary</h2>
-        <p>{progress.description}</p>
+        <div className="card card-container">
+          <p>{progress.description}</p>
+        </div>
       </section>
     </div>
   );
-};
-
+}
 export default Dashboard;

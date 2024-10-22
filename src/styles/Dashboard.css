@@ -1,19 +1,42 @@
 .dashboard {
-    padding: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
   h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
   }
   
   section {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
   
   h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
   }
   
   ul {
@@ -22,8 +45,30 @@
   }
   
   li {
-    background-color: #f0f0f0;
-    padding: 10px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
     margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #444;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard {
+      padding: 20px;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
   }
   
