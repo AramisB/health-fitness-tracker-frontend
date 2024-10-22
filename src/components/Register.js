@@ -22,7 +22,7 @@ function Register() {
 
     try {
       await register(name, email, password); // Call the register function
-      navigate('/dashboard'); // Redirect to the home page or dashboard after registration
+      navigate('/dashboard'); // Redirect to the or dashboard after registration
     } catch (err) {
       setError(err.message);
     }
