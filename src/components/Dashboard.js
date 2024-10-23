@@ -35,7 +35,6 @@ const Dashboard = () => {
     return <p>Loading...</p>; 
   }
 
-  // Calculate total calories burned and number of logged days
   const totalCaloriesBurned = progress.reduce((total, p) => total + p.caloriesBurned, 0);
   const totalDays = progress.length;
 
