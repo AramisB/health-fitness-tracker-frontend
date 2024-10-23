@@ -1,9 +1,18 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+
+// Create AuthContext
 const AuthContext = createContext();
 
+// AuthProvider Component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  // State for storing the authenticated user
+  const [user, setUser] = useState(() => {
+    // Hydrate user state from local storage if available
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
+  // Login function
   const login = async (email, password) => {
     try {
       const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/login', {
@@ -13,20 +22,24 @@ export const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
+      console.log('Login Response:', data); // Log the server response to check if name exists
+
       if (response.ok) {
-        const userWithToken = { ...data.user, token: data.token }; // Combine user data and token
-        setUser(userWithToken); // Set the combined user object
-        localStorage.setItem('token', data.token); // Save the JWT in local storage
+        // Combine user data and token from the response
+        const userWithToken = { ...data.user, token: data.token };
+        setUser(userWithToken); // Set the user state
+        localStorage.setItem('user', JSON.stringify(userWithToken)); // Save user data in localStorage
       } else {
-        throw new Error(data.msg); // Handle error from server
+        throw new Error(data.msg); // Handle server errors
       }
     } catch (error) {
-      console.error('Login failed:', error); // Log error
+      console.error('Login failed:', error); // Log any error
     }
   };
 
+  // Register function
   const register = async (name, email, password) => {
     try {
       const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/register', {
@@ -38,21 +51,34 @@ export const AuthProvider = ({ children }) => {
       });
 
       const data = await response.json();
+      console.log('Register Response:', data);
+
       if (response.ok) {
-        setUser(data.user); // Set the user from response data
-        localStorage.setItem('token', data.token); // Save the JWT in local storage
+        // Combine user data and token from the response
+        const userWithToken = { ...data.user, token: data.token };
+        setUser(userWithToken); // Set the user state
+        localStorage.setItem('user', JSON.stringify(userWithToken)); // Save user data in localStorage
       } else {
-        throw new Error(data.msg); // Handle error from server
+        throw new Error(data.msg); // Handle server errors
       }
     } catch (error) {
-      console.error('Registration failed:', error); // Log error
+      console.error('Registration failed:', error); // Log any error
     }
   };
 
+  // Logout function
   const logout = () => {
-    setUser(null);
-    localStorage.removeItem('token'); // Remove token on logout
+    setUser(null); // Clear user state
+    localStorage.removeItem('user'); // Remove user from localStorage
   };
+
+  // Check if the user is logged in from localStorage on app start
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // Hydrate user state if found in localStorage
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}>
@@ -61,7 +87,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use AuthContext
+// Custom hook to use the AuthContext
 export const useAuth = () => {
   return useContext(AuthContext);
 };
