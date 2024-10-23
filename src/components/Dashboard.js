@@ -14,19 +14,21 @@ const Dashboard = () => {
     if (user) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`/api/dashboard`, {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          });
-          setExercises(response.data.data.exercises);
-          setGoals(response.data.data.goals);
-          setProgress(response.data.data.progress);
+            console.log('Fetching dashboard data with token:', user.token);
+            const response = await axios.get("https://seal-app-buzkz.ondigitalocean.app/api/dashboard", {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            });
+            console.log('Dashboard Response:', response.data);
+            setExercises(response.data.data.exercises);
+            setGoals(response.data.data.goals);
+            setProgress(response.data.data.progress);
         } catch (error) {
-          console.error('Error fetching data:', error);
+            console.error('Error fetching data:', error);
         }
-      };
-      fetchData();
+    };
+    fetchData();
     }
   }, [user]);
 
@@ -34,7 +36,6 @@ const Dashboard = () => {
     return <p>Loading...</p>; 
   }
 
-  // Example data for chart.js
   const progressData = {
     labels: progress.map(p => new Date(p.date).toLocaleDateString()), // Dates of logged exercises
     datasets: [{

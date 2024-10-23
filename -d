@@ -1,2 +1,2 @@
-{"msg":"No token, authorization denied"}--_curl_--"goal": "Run 5 kilometers"
---_curl_-- "deadline": "2024-10-30"
+{"msg":"Invalid credentials"}--_curl_--"email": "sarah123@gmail.com"
+--_curl_-- "password": "Kosgei123"
