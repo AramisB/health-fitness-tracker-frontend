@@ -20,9 +20,20 @@ const Dashboard = () => {
             },
           });
           console.log('Dashboard Response:', response.data);
+          
+          // Set exercises, goals, progress
           setExercises(response.data.data.exercises);
           setGoals(response.data.data.goals);
           setProgress(response.data.data.progress);
+  
+          // Update user's name in context if it's missing
+          if (!user.name) {
+            setUser((prevUser) => ({
+              ...prevUser,
+              name: response.data.data.name,  // Capture the name from API response
+            }));
+          }
+  
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -30,6 +41,7 @@ const Dashboard = () => {
       fetchData();
     }
   }, [user]);
+
 
   if (!user) {
     return <p>Loading...</p>; 
@@ -40,7 +52,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <h1>Welcome to Your Dashboard, {user.name}!</h1>
+      <h1>Welcome to Your Dashboard, {user.name || 'User'}!</h1>
 
       <section>
         <h2>Your Logged Exercises</h2>
