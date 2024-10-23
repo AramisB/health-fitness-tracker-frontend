@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
-import { Bar } from 'react-chartjs-2';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
@@ -14,21 +13,21 @@ const Dashboard = () => {
     if (user) {
       const fetchData = async () => {
         try {
-            console.log('Fetching dashboard data with token:', user.token);
-            const response = await axios.get("https://seal-app-buzkz.ondigitalocean.app/api/dashboard", {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            });
-            console.log('Dashboard Response:', response.data);
-            setExercises(response.data.data.exercises);
-            setGoals(response.data.data.goals);
-            setProgress(response.data.data.progress);
+          console.log('Fetching dashboard data with token:', user.token);
+          const response = await axios.get("https://seal-app-buzkz.ondigitalocean.app/api/dashboard", {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          });
+          console.log('Dashboard Response:', response.data);
+          setExercises(response.data.data.exercises);
+          setGoals(response.data.data.goals);
+          setProgress(response.data.data.progress);
         } catch (error) {
-            console.error('Error fetching data:', error);
+          console.error('Error fetching data:', error);
         }
-    };
-    fetchData();
+      };
+      fetchData();
     }
   }, [user]);
 
@@ -36,16 +35,9 @@ const Dashboard = () => {
     return <p>Loading...</p>; 
   }
 
-  const progressData = {
-    labels: progress.map(p => new Date(p.date).toLocaleDateString()), // Dates of logged exercises
-    datasets: [{
-      label: 'Calories Burned',
-      data: progress.map(p => p.caloriesBurned), // Assuming you have calories burned data
-      backgroundColor: 'rgba(75,192,192,0.6)',
-      borderColor: 'rgba(75,192,192,1)',
-      borderWidth: 1,
-    }]
-  };
+  // Calculate total calories burned and number of logged days
+  const totalCaloriesBurned = progress.reduce((total, p) => total + p.caloriesBurned, 0);
+  const totalDays = progress.length;
 
   return (
     <div className="dashboard">
@@ -90,7 +82,10 @@ const Dashboard = () => {
         {progress.length === 0 ? (
           <p>No progress data available.</p>
         ) : (
-          <Bar data={progressData} />
+          <div className="progress-summary">
+            <p>You have burned a total of <strong>{totalCaloriesBurned}</strong> calories over <strong>{totalDays}</strong> days!</p>
+            <p>Keep up the great work! 🎉</p>
+          </div>
         )}
       </section>
     </div>
