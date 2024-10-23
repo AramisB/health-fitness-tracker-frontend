@@ -14,7 +14,7 @@ const Dashboard = () => {
     if (user) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`https://monkfish-app-od5cu.ondigitalocean.app/dashboard`, {
+          const response = await axios.get(`/api/dashboard`, {
             headers: {
               Authorization: `Bearer ${user.token}`,
             },
