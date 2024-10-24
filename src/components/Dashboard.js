@@ -26,14 +26,6 @@ const Dashboard = () => {
           setGoals(response.data.data.goals);
           setProgress(response.data.data.progress);
   
-          // Update user's name in context if it's missing
-          if (!user.name) {
-            setUser((prevUser) => ({
-              ...prevUser,
-              name: response.data.data.name,  // Capture the name from API response
-            }));
-          }
-  
         } catch (error) {
           console.error('Error fetching data:', error);
         }
