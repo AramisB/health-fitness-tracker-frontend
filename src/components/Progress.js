@@ -10,23 +10,25 @@ function Progress() {
   // Fetch progress data from the backend
   useEffect(() => {
     const fetchProgress = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/progress', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      if (user) {
+        try {
+          const token = user.token; // Use the token from the user context
+          const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/progress', {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-        const data = await response.json();
-        if (response.ok) {
-          setProgressData(data.progress);
-        } else {
-          console.error('Error fetching progress:', data.msg);
+          const data = await response.json();
+          if (response.ok) {
+            setProgressData(data.progress);
+          } else {
+            console.error('Error fetching progress:', data.msg);
+          }
+        } catch (error) {
+          console.error('Error:', error);
         }
-      } catch (error) {
-        console.error('Error:', error);
       }
     };
 
@@ -47,7 +49,6 @@ function Progress() {
     ],
   };
 
-  // Render the ProgressChart component with the chart data
   return (
     <div>
       <h2>Your Progress</h2>

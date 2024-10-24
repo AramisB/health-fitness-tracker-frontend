@@ -12,7 +12,7 @@ function Goals() {
   const handleSetGoal = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
+      const token = user.token; // Use the token from the user context
       const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/goals', {
         method: 'POST',
         headers: {
@@ -40,23 +40,25 @@ function Goals() {
   // Fetch existing goals when the component mounts
   useEffect(() => {
     const fetchGoals = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:5000/api/goals', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      if (user) {
+        try {
+          const token = user.token; // Use the token from the user context
+          const response = await fetch('https://seal-app-buzkz.ondigitalocean.app/api/goals', {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-        const data = await response.json();
-        if (response.ok) {
-          setGoalsList(data.goals); // Assuming the API returns a list of goals
-        } else {
-          console.error('Error fetching goals:', data.msg);
+          const data = await response.json();
+          if (response.ok) {
+            setGoalsList(data.goals); // Assuming the API returns a list of goals
+          } else {
+            console.error('Error fetching goals:', data.msg);
+          }
+        } catch (error) {
+          console.error('Error:', error);
         }
-      } catch (error) {
-        console.error('Error:', error);
       }
     };
 
