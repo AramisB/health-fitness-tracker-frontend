@@ -3,6 +3,11 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 // Create AuthContext
 const AuthContext = createContext();
 
+// Custom hook to use the AuthContext
+export const useAuth = () => {
+  return useContext(AuthContext); // This defines the useAuth hook
+};
+
 // AuthProvider Component
 export const AuthProvider = ({ children }) => {
   // State for storing the authenticated user
@@ -11,6 +16,15 @@ export const AuthProvider = ({ children }) => {
     const storedUser = localStorage.getItem('user');
     return storedUser ? JSON.parse(storedUser) : null;
   });
+
+  // Save user to localStorage whenever it changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user)); // Update localStorage
+    } else {
+      localStorage.removeItem('user'); // Clear localStorage on logout
+    }
+  }, [user]);
 
   // Login function
   const login = async (email, password) => {
@@ -24,13 +38,12 @@ export const AuthProvider = ({ children }) => {
       });
 
       const data = await response.json();
-      console.log('Login Response:', data); // Log the server response to check if name exists
+      console.log('Login Response:', data); // Log the server response
 
       if (response.ok) {
         // Combine user data and token from the response
         const userWithToken = { ...data.user, token: data.token };
         setUser(userWithToken); // Set the user state
-        localStorage.setItem('user', JSON.stringify(userWithToken)); // Save user data in localStorage
       } else {
         throw new Error(data.msg); // Handle server errors
       }
@@ -57,7 +70,6 @@ export const AuthProvider = ({ children }) => {
         // Combine user data and token from the response
         const userWithToken = { ...data.user, token: data.token };
         setUser(userWithToken); // Set the user state
-        localStorage.setItem('user', JSON.stringify(userWithToken)); // Save user data in localStorage
       } else {
         throw new Error(data.msg); // Handle server errors
       }
@@ -69,16 +81,7 @@ export const AuthProvider = ({ children }) => {
   // Logout function
   const logout = () => {
     setUser(null); // Clear user state
-    localStorage.removeItem('user'); // Remove user from localStorage
   };
-
-  // Check if the user is logged in from localStorage on app start
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser)); // Hydrate user state if found in localStorage
-    }
-  }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}>
@@ -87,9 +90,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use the AuthContext
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
+// Export the AuthContext for other components
 export default AuthContext;
